@@ -1,6 +1,6 @@
 (cout nl "Structural Inductive proof: mirror" nl)
 ;
-; $Id: mirror.scm,v 1.9 2005/02/03 03:30:40 oleg Exp $
+; $Id: mirror.scm,v 1.10 2005/02/05 05:26:01 oleg Exp $
 
 ; First we need an extendible database of relations.
 ; We should be able to add to the database later on -- extend
@@ -211,10 +211,10 @@
 (define verify-goal
   (lambda (preds kb)
     (cond
-      [(null? (cdr preds)) (kb (car preds))]
-      [else (all
+      ((null? (cdr preds)) (kb (car preds)))
+      (else (all
               (kb (car preds))
-              (verify-goal (cdr preds) kb))])))
+              (verify-goal (cdr preds) kb))))))
 
 ; extend the kb with the list of assumptions
 ; this is just like 'any' only it's a procedure rather than a syntax
@@ -235,9 +235,9 @@
 
 (define extend-kb
   (lambda (facts kb)
-    (let ([facts (universalize facts)])
+    (let ((facts (universalize facts)))
       (printf "Extending KB with ~s~%" facts)
-      (let loop ([facts facts])
+      (let loop ((facts facts))
         (if (null? facts) kb
             (extend-relation (t)
               (fact () (car facts))
