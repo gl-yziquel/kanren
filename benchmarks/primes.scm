@@ -1,6 +1,6 @@
 ;; http://www.sics.se/quintus/primes.pl
 
-; $Id: primes.scm,v 1.3 2004/02/27 01:34:16 dfried Exp $
+; $Id: primes.scm,v 1.4 2004/03/04 13:45:20 dfried Exp $
 
 (define primes
   (relation (head-let limit ps)
@@ -14,8 +14,7 @@
     (relation (low high rest)
       (to-show low high `(,low . ,rest))
       (all!!
-	(predicate (low high)
-	  (<= low high))
+	(project (low high) (predicate (<= low high)))
 	(exists (m)
 	  (all!!
 	    (project (low)
@@ -39,8 +38,8 @@
     (relation (p i is (once nis0))
       (to-show p `(,i . ,is) nis0)
       (all!!
-        (predicate (i p)
-	  (not (zero? (modulo i p))))
+        (project (i p)
+	  (predicate (not (zero? (modulo i p)))))
 	(exists (nis)
 	  (all!!
 	    (project/no-check (i nis)
