@@ -108,7 +108,7 @@
 
 ; There is a Prolog version of this code, which has termination proofs.
 ;
-; $Id: pure-bin-arithm.scm,v 1.17 2004/12/15 00:31:46 oleg Exp $
+; $Id: pure-bin-arithm.scm,v 1.18 2004/12/18 05:41:39 oleg Exp $
 
 ; Auxiliary functions to build and show binary numerals
 ;
@@ -1221,6 +1221,17 @@
 	      ))
 	  `(((n1.0 ,(build n)) (m1.0 ,(build m))
 	     (q1.0 ,(build q)) (r1.0 ,(build r))))))))))
+
+
+; quite dubious tests. The problem is actually in =ol and <ol
+; (solve 1 (q)
+;     (poso q)
+;     (divo `(0 . ,q) `(1 1 . ,q) '() `(0 . ,q))))
+;
+; (solve 1 (q)
+;     (poso q)
+;     (divo `(0 . ,q) `(1 . ,q) '() `(0 . ,q))))
+
 
 (test-check 'exp2-1
   (solve 10 (q) (exp2 '(1 1 1 1) '() q))
