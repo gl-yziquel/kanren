@@ -23,7 +23,7 @@
 ; we can indeed assume that the cost of solving either e() or t() is
 ; constant. We can emulate that in our system, see below.
 ;
-; $Id: alg-complexity.scm,v 1.4 2004/03/04 13:42:06 dfried Exp $
+; $Id: alg-complexity.scm,v 4.50 2005/02/12 00:04:19 oleg Exp $
 
 ; Here's the first attempt:
 ; make the disjunction of facts (e 1 2) (e 2 3) ... (e n-1 n) where n>1

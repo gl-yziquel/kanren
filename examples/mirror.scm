@@ -1,6 +1,6 @@
 (cout nl "Structural Inductive proof: mirror" nl)
 ;
-; $Id: mirror.scm,v 1.11 2005/02/05 05:57:37 oleg Exp $
+; $Id: mirror.scm,v 4.50 2005/02/12 00:04:47 oleg Exp $
 
 ; First we need an extendible database of relations.
 ; We should be able to add to the database later on -- extend

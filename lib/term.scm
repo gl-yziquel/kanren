@@ -60,7 +60,7 @@
 ; That property is guaranteed by the unifier. That property lets us
 ; build an inverse index to find the equivalence class of x.
 ;
-; $Id: term.scm,v 4.3 2005/02/05 05:57:39 oleg Exp $
+; $Id: term.scm,v 4.50 2005/02/12 00:05:27 oleg Exp $
 
 
 ;----------------------------------------

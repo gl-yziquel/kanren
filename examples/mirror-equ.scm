@@ -1,6 +1,6 @@
 (cout nl "Structural Inductive proof with equational theory: mirror" nl)
 
-; $Id: mirror-equ.scm,v 1.6 2005/02/03 03:30:40 oleg Exp $
+; $Id: mirror-equ.scm,v 4.50 2005/02/12 00:04:46 oleg Exp $
 
 ; See mirror.scm for preliminaries
 

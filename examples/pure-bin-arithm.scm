@@ -108,7 +108,7 @@
 
 ; There is a Prolog version of this code, which has termination proofs.
 ;
-; $Id: pure-bin-arithm.scm,v 1.20 2005/02/05 05:57:37 oleg Exp $
+; $Id: pure-bin-arithm.scm,v 4.50 2005/02/12 00:04:49 oleg Exp $
 
 ; Auxiliary functions to build and show binary numerals
 ;

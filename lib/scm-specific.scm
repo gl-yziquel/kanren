@@ -1,6 +1,6 @@
 ; KANREN prelude specific to SCM-Scheme
 ;
-; $Id: scm-specific.scm,v 4.1 2004/04/10 02:47:22 oleg Exp $
+; $Id: scm-specific.scm,v 4.50 2005/02/12 00:05:26 oleg Exp $
 
 (define gensym gentemp)
 

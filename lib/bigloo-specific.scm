@@ -1,6 +1,6 @@
 ; KANREN prelude specific to Bigloo-Scheme
 ;
-; $Id: bigloo-specific.scm,v 4.2 2004/04/10 02:47:21 oleg Exp $
+; $Id: bigloo-specific.scm,v 4.50 2005/02/12 00:05:03 oleg Exp $
 
 (define bigloo-error error)
 (define error

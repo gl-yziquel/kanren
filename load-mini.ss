@@ -1,5 +1,5 @@
 ; Load Mini-Kanren (for interactive use)
-; $Id: load-mini.ss,v 1.1 2004/05/06 03:42:57 oleg Exp $
+; $Id: load-mini.ss,v 4.50 2005/02/12 00:04:19 oleg Exp $
 
 ;(load "lib/chez-specific.ss")
 (load "mini/minikanrensupport.scm")

@@ -1,6 +1,6 @@
 ; KANREN prelude specific to Chez-Scheme
 ;
-; $Id: chez-specific.ss,v 4.1 2004/04/09 23:32:38 oleg Exp $
+; $Id: chez-specific.ss,v 4.50 2005/02/12 00:05:05 oleg Exp $
 
 ;(load "plshared.ss")
 

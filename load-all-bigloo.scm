@@ -1,5 +1,5 @@
 ; Load everything (for interactive use)
-; $Id: load-all-bigloo.scm,v 1.1 2004/04/09 23:32:38 oleg Exp $
+; $Id: load-all-bigloo.scm,v 4.50 2005/02/12 00:04:17 oleg Exp $
 (module kanren
   (include "lib/bigloo-specific.scm")
   (include "lib/kanren.ss")

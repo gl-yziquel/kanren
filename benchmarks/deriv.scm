@@ -1,6 +1,6 @@
 ;; http://www.sics.se/quintus/deriv.pl
 
-; $Id: deriv.scm,v 1.1 2004/02/27 01:37:00 dfried Exp $
+; $Id: deriv.scm,v 4.50 2005/02/12 00:04:35 oleg Exp $
 
 (define d
   (extend-relation (a1 a2 a3)

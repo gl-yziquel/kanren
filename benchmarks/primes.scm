@@ -1,6 +1,6 @@
 ;; http://www.sics.se/quintus/primes.pl
 
-; $Id: primes.scm,v 1.4 2004/03/04 13:45:20 dfried Exp $
+; $Id: primes.scm,v 4.50 2005/02/12 00:04:35 oleg Exp $
 
 (define primes
   (relation (head-let limit ps)

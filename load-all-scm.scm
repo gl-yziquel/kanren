@@ -1,5 +1,5 @@
 ; Load everything (for interactive use: SCM Scheme)
-; $Id: load-all-scm.scm,v 1.4 2005/02/05 05:25:54 oleg Exp $
+; $Id: load-all-scm.scm,v 4.50 2005/02/12 00:04:18 oleg Exp $
 
 ;---- No longer needed. KANREN now uses round parentheses only
 ; ; For historical reasons, KANREN code uses square brackets, which
@@ -38,4 +38,5 @@
 (load "examples/mirror-equ.scm")
 (load "examples/deduction.scm")
 (load "examples/pure-bin-arithm.scm")
-;(load "benchmarks/alg-complexity.scm") ; must be last
+(load "benchmarks/nrev.scm")
+(load "benchmarks/queens.scm")

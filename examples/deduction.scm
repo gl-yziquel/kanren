@@ -23,7 +23,7 @@
 ; The meta-object machinery to build a prover is explained in the
 ; proof of mirror.
 ;
-; $Id: deduction.scm,v 1.11 2005/02/05 05:25:59 oleg Exp $
+; $Id: deduction.scm,v 4.50 2005/02/12 00:04:44 oleg Exp $
 
 (newline)
 (display "Inductive proof of the Deduction Theorem for Hilbert Prop Calc")
@@ -128,11 +128,11 @@
   (lambda (t)
     (exists (ind)
       (all! (== t ind)
-	(lambda@ (sk fk subst)
+	(lambda@ (subst)
 	  (let* ((indc (subst-in ind subst))
 		 (indc1 (universalize indc)))
 	  (pretty-print indc1)
-	  (@ sk fk (unify indc1 t subst))
+	  (@ succeed (unify indc1 t subst))
 	  ;(@ sk fk subst)
 	  )
       )))))
@@ -528,7 +528,7 @@
     (define-syntax ==
       (syntax-rules ()
 	((_ t u)
-	  (lambda@ (sk fk subst)
+	  (lambda@ (subst)
 	    (cond
 	      ((unify t u subst)
 		=> (lambda (subst)
@@ -536,8 +536,8 @@
 		     (pretty-print (concretize t))
 		     (pretty-print (concretize u))
 		     (pretty-print (concretize-subst* subst))
-		     (@ sk fk subst)))
-	      (else (fk)))))))
+		     (@ succeed subst)))
+	      (else (fail subst)))))))
     ))
 
  (cout nl "Check the inductive  case: MP, using goal-fwd: "
@@ -588,7 +588,7 @@
   (define-syntax ==
     (syntax-rules ()
       ((_ t u)
-	(lambda@ (sk fk subst)
+	(lambda@ (subst)
 	  (let ((subst (unify t u subst)))
-	    (if subst (@ sk fk subst) (fk)))))))
+	    (if subst (succeed subst) (fail subst)))))))
 )

@@ -15,7 +15,7 @@
 ; latter approach is similar to that of inductive proofs (see files
 ; ./deduction.scm and ./mirror-equ.scm)
 ;
-; $Id: type-inference.scm,v 1.19 2005/02/05 05:57:38 oleg Exp $
+; $Id: type-inference.scm,v 4.50 2005/02/12 00:05:01 oleg Exp $
 
 (display "Type inference") (newline)
 
