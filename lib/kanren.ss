@@ -1,6 +1,6 @@
 ;(load "plshared.ss")
 
-; $Id: kanren.ss,v 3.5 2003/12/23 05:02:44 oleg Exp $
+; $Id: kanren.ss,v 3.6 2003/12/23 19:52:02 oleg Exp $
 
 (define-syntax let-values
   (syntax-rules ()
@@ -4818,6 +4818,16 @@
 (time (p-test 32 64))
 (time (p-test 64 128))
 (time (p-test 96 192))
+
+(printf "~nempty prune-subst~n")
+(define prune-subst  (lambda (vars in-subst subst) subst))
+
+(pretty-print (p-test 4 5))
+
+(time (p-test 32 64))
+(time (p-test 64 128))
+(time (p-test 96 192))
+
 
 (define (p-test m n)
   (letrec
