@@ -5,7 +5,7 @@
 ; ?- time(dobench(10)).
 ; % 134,676,991 inferences in 60.43 seconds (2228656 Lips)
 
-; $Id: queens.scm,v 1.5 2004/03/04 13:47:28 dfried Exp $
+; $Id: queens.scm,v 1.6 2004/03/12 05:47:26 oleg Exp $
 
 (define benchmark_count 100)
 
@@ -154,3 +154,9 @@
 ;     13193 collections
 ;     265112 ms elapsed cpu time, including 3682 ms collecting
 ;     270339 ms elapsed real time, including 3657 ms collecting
+; kanren.ss version 3.53
+; (time (solve 1000 ...))
+;     13476 collections
+;     263209 ms elapsed cpu time, including 3625 ms collecting
+;     266191 ms elapsed real time, including 3609 ms collecting
+
