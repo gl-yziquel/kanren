@@ -1,5 +1,5 @@
 ; Load everything (for interactive use: SCM Scheme)
-; $Id: load-all-scm.scm,v 1.2 2004/07/23 18:24:16 oleg Exp $
+; $Id: load-all-scm.scm,v 1.3 2005/02/03 03:30:39 oleg Exp $
 
 ; For historical reasons, KANREN code uses square brackets, which
 ; SCM does not understand, natively. So, we have to modify load
@@ -28,6 +28,7 @@
 
 
 (load "lib/scm-specific.scm")
+(load "lib/term.scm")
 (load "lib/kanren.ss")
 (load "examples/type-inference.scm")
 (load "examples/typeclasses.scm")

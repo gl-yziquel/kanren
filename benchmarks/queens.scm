@@ -5,7 +5,7 @@
 ; ?- time(dobench(10)).
 ; % 134,676,991 inferences in 60.43 seconds (2228656 Lips)
 
-; $Id: queens.scm,v 1.11 2004/10/29 01:37:40 oleg Exp $
+; $Id: queens.scm,v 1.12 2005/02/03 03:30:40 oleg Exp $
 
 (define benchmark_count 100)
 
@@ -369,3 +369,10 @@
 ;     13660 ms elapsed cpu time, including 242 ms collecting
 ;     13754 ms elapsed real time, including 253 ms collecting
 ;     1443508328 bytes allocated, including 1443541736 bytes reclaimed
+
+; kanren.ss version 4.17 (similar to 4.11)
+; (time (solve 1000 ...))
+;     1333 collections
+;     13586 ms elapsed cpu time, including 248 ms collecting
+;     13762 ms elapsed real time, including 258 ms collecting
+;     1443382216 bytes allocated, including 1443524336 bytes reclaimed

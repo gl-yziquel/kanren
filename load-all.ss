@@ -1,7 +1,8 @@
 ; Load everything (for interactive use)
-; $Id: load-all.ss,v 1.8 2004/07/23 18:24:16 oleg Exp $
+; $Id: load-all.ss,v 1.9 2005/02/03 03:30:39 oleg Exp $
 
 (load "lib/chez-specific.ss")
+(load "lib/term.scm")
 (load "lib/kanren.ss")
 (load "examples/type-inference.scm")
 (load "examples/typeclasses.scm")
