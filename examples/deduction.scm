@@ -23,7 +23,7 @@
 ; The meta-object machinery to build a prover is explained in the
 ; proof of mirror.
 ;
-; $Id: deduction.scm,v 1.3 2004/02/03 01:08:46 oleg Exp $
+; $Id: deduction.scm,v 1.4 2004/02/14 00:14:35 oleg Exp $
 
 (newline)
 (display "Inductive proof of the Deduction Theorem for Hilbert Prop Calc")
@@ -133,7 +133,7 @@
               (map
                 (lambda (v)
                   (commitment v
-                    (symbol-append '! (var-id v) ': (gensym))))
+                    (symbol-append '! (logical-variable-id v) ': (gensym))))
                 fv)])
         (subst-in term subst)))))
 

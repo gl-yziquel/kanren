@@ -1,6 +1,6 @@
 ; Type Inference
 ;
-; $Id: type-inference.scm,v 1.1 2004/01/20 04:53:54 oleg Exp $
+; $Id: type-inference.scm,v 1.2 2004/02/14 00:14:35 oleg Exp $
 
 (display "Type inference") (newline)
 
@@ -89,7 +89,7 @@
                 [(assq t env)
                  => (lambda (pr)
                       (values (cdr pr) env))]
-                [else (let ([new-var (var (var-id t))])
+                [else (let ([new-var (logical-variable (logical-variable-id t))])
                         (values new-var (cons `(,t . ,new-var) env)))])]
              [(pair? t)
               (let-values (a-t env) (instantiate-term (car t) env)

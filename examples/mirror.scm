@@ -1,6 +1,6 @@
 (display "Structural Inductive proof: mirror") (newline)
 ;
-; $Id: mirror.scm,v 1.1 2004/01/20 04:53:54 oleg Exp $
+; $Id: mirror.scm,v 1.2 2004/02/14 00:14:35 oleg Exp $
 
 ; First we need an extendible database of relations.
 ; We should be able to add to the database later on -- extend
@@ -248,7 +248,7 @@
               (map
                 (lambda (v)
                   (commitment v
-                    (symbol-append (var-id v) ': (gensym))))
+                    (symbol-append (logical-variable-id v) ': (gensym))))
                 fv)])
         (subst-in term subst)))))
 
