@@ -1,6 +1,6 @@
 ; Type Inference
 ;
-; $Id: type-inference.scm,v 1.4 2004/03/19 23:37:24 oleg Exp $
+; $Id: type-inference.scm,v 1.5 2004/03/22 23:40:34 oleg Exp $
 
 (display "Type inference") (newline)
 
@@ -268,8 +268,8 @@
                    ((f x) x))))
         ?)))
   '((?.0 (-->
-           (--> t.0 (--> t.0 t.1))
-           (--> t.0 t.1)))))
+           (--> t-rand.0 (--> t-rand.0 t.0))
+           (--> t-rand.0 t.0)))))
 
 (test-check 'everything-but-polymorphic-let
   (solution (?)
