@@ -1,5 +1,7 @@
+;;; Even prettier code for alli
+
 ;;; all_2 succeed
-;(load "minikanrensupport.scm")
+(load "minikanrensupport.scm")
 
 ;;; working version
 (define with-sk
@@ -85,9 +87,21 @@
          (@ ef-like-sk-maker (@ c sk) fk)
          ef-like-fk
          s
-         (lambda () (@ a sk fk s))))]))
+         (lambda@ () (@ a sk fk s))))]))
 
-(define-syntax ef ;;; old definition
+(define ef-like-fk
+  (lambda@ ()
+    (lambda@ (w)
+      (printf "called from ef-like-fk\n")
+      (w))))
+
+(define ef-like-sk-maker
+  (lambda@ (sk fk)
+    (lambda@ (like-fk s)
+      (lambda@ (w^)
+        (@ sk (lambda@ () (@ (like-fk) fk)) s)))))
+
+'(define-syntax ef ;;; old definition
   (syntax-rules ()
     [(_ a b c)
      (lambda@ (sk fk s)
@@ -99,24 +113,14 @@
                  [else (fk)]))
              (@ c sk fk s))))]))
 
-(define ef-like-fk
-  (lambda@ ()
-    (lambda@ (w) (w))))
-
-(define ef-like-sk-maker
-  (lambda (sk fk)
-    (lambda@ (fk^ s)
-      (lambda@ (w^)
-        (@ sk (lambda@ () (@ (fk^) fk)) s)))))
-
 ;;; all, anyi
 
 (define-syntax condi 
   (syntax-rules (else)
     ((_ (else a* ...)) (all a* ...))
-    ((_ (a* ...) c* ...) (anyi (all a* ...) (condi c* ...)))))
+    ((_ (a* ...) c* ...) (bi-anyi (all a* ...) (condi c* ...)))))
 
-(define-syntax anyi
+(define-syntax bi-anyi
   (syntax-rules ()
     [(_ a1 a2)
      (lambda@ (sk fk s)
@@ -126,7 +130,7 @@
 
 (define interleave
   (lambda@ (sk fk sant1 sant2)
-    (@ (@ sant1 like-sk like-fk)
+    (@ (@ sant1 bi-anyi-like-sk bi-anyi-like-fk)
        (cons
          (lambda@ (s residual1)
            (@ sk
@@ -135,9 +139,9 @@
              s))
          (lambda@ () (@ sant2 sk fk))))))
 
-(define like-sk
+(define bi-anyi-like-sk
   (lambda@ (fk s)
-    (lambda (w) ;a = subst -> sant --> ans and b is an fk 
+    (lambda@ (w) ;a = subst -> sant --> ans and b is an fk 
       (@ (car w)
          s 
          (lambda@ (sk1 fk1) ;;; this is a sant
@@ -147,7 +151,7 @@
                   (@ sk1 (lambda@ () (@ residual sk1 fk1)) s^)) ; new b
                 fk1)))))))
 
-(define like-fk
+(define bi-anyi-like-fk
   (lambda@ ()
     (lambda@ (w) (@ (cdr w)))))
 
@@ -220,7 +224,7 @@
 
 (define answer
   (lambda (x s)
-    (subst-in x s)))
+    (cons x s)))
 
 ;;; run-stream
 
@@ -259,15 +263,17 @@
 (define twice
   (lambda (a)
     (lambda@ (sk fk s)
-      (let ((sk^ (lambda@ (fk^ s^)
-                   (lambda (w)
-                     (@ sk
-                       (cond
-                         [w fk]
-                         [else (lambda () (@ (fk^) #t))])
-                       s^))))
-            (fk^ (lambda () (lambda (w) (fk)))))
-        (@ a sk^ fk^ s #f)))))
+      (let ((like-sk (lambda@ (fk^ s^)
+                       (lambda (w)
+                         (@ sk
+                            (cond
+                              [w fk]
+                              [else (lambda () (@ (fk^) #t))])
+                            s^))))
+            (like-fk (lambda ()
+                       (lambda (w)
+                         (fk)))))
+        (@ a like-sk like-fk s #f)))))
 
 (define at-most
   (lambda (n)
@@ -276,14 +282,14 @@
         (let ((like-sk (lambda@ (fk^ s^)
                           (lambda (w)
                             (@ sk
-                              (if (= w 1)
-                                  fk
-                                  (lambda () (@ (fk^) (- w 1))))
+                              (cond
+                               [(= w 0) fk]
+                               [else (lambda () (@ (fk^) (- w 1)))])
                               s^))))
               (like-fk (lambda ()
-                          (lambda (w)
-                            (fk)))))
-          (@ a like-sk like-fk s n))))))
+                         (lambda (w)
+                           (fk)))))
+          (@ a like-sk like-fk s (- n 1)))))))
 
 (define handy
   (lambda (x y q)
@@ -403,13 +409,13 @@
 (pretty-print `(,test-6
                 = (7 16)))
 
-(define test-7  ;;; tests anyi
+(define test-7  ;;; tests bi-anyi
   (prefix 9
     (run-stream (x)
-      (anyi
+      (bi-anyi
         (any (== x 3)
           (any
-            (anyi
+            (bi-anyi
               (any (== x 20) (== x 21))
               (any (== x 30) (== x 31)))
             (== x 5)))
@@ -587,5 +593,297 @@
            (lambda@ () (@ sk fk s)) 
           s)))))
 
+
+(define alli-like-sk
+  (lambda@ (fk s)
+    (lambda@ (w)
+      (@ (car w) s 
+         (lambda@ (sk1 fk1)
+           (@ (@ fk) 
+              (cons
+                (lambda@ (s x)
+                  (@ sk1 (lambda () (@ x sk1 fk1)) s))
+                fk1)))))))
+
+(define alli-like-fk
+  (lambda@ ()
+    (lambda@ (w) (@ (cdr w)))))
   
+(define-syntax alli
+  (syntax-rules ()
+    [(_) (all)]
+    [(_ a) a]
+    [(_ a a* ...)
+      (lambda@ (sk fk s)
+	(bi-alli sk fk (lambda@ (sk fk) (@ a sk fk s)) (alli a* ...)))]))
+
+(define bi-alli
+  (lambda (sk fk sa1 a2)
+    (@ (lambda@ (sa) (@ sa alli-like-sk alli-like-fk)) sa1
+       (cons
+         (lambda@ (s resid)
+	   (@ interleave sk fk
+              (lambda@ (sk fk) (@ a2 sk fk s))
+              (lambda@ (sk fk) (bi-alli sk fk resid a2))))
+           fk))))
+
+(define-syntax condi$ 
+  (syntax-rules (else)
+    ((_ (else a* ...)) (alli a* ...))
+    ((_ (a* ...) c* ...) (bi-anyi (alli a* ...) (condi$ c* ...)))))
+
+(define-syntax cond@$
+  (syntax-rules (else)
+    ((_ (else a* ...)) (alli a* ...))
+    ((_ (a* ...) c* ...) (any (alli a* ...) (cond@$ c* ...)))))
+
+
+
+; testing alli
+(test-check 'alli-1
+  (prefix 100
+    (run-stream (q)
+      (fresh (x y z)
+        (alli
+          (any (== x 1) (== x 2))
+          (any (== y 3) (== y 4))
+          (any (== z 5) (== z 6) (== z 7)))
+        (== `(,x ,y ,z) q))))
+  '((1 3 5)
+    (2 3 5)
+    (1 4 5)
+    (2 4 5)
+    (1 3 6)
+    (2 3 6)
+    (1 4 6)
+    (2 4 6)
+    (1 3 7)
+    (2 3 7)
+    (1 4 7)
+    (2 4 7)))
+
+
+(test-check 'alli-2
+  (prefix 100
+    (run-stream (q)
+      (fresh (x y z)
+        (cond@$
+          [(any (== x 1) (== x 2)) (any (== y 3) (== y 4)) (any (== z 5) (== z
+6) (== z 7))]
+          [else fail])
+        (== `(,x ,y ,z) q))))
+  '((1 3 5)
+    (2 3 5)
+    (1 4 5)
+    (2 4 5)
+    (1 3 6)
+    (2 3 6)
+    (1 4 6)
+    (2 4 6)
+    (1 3 7)
+    (2 3 7)
+    (1 4 7)
+    (2 4 7)))
+
+(test-check 'alli-3
+  (prefix 100
+    (run-stream (q)
+      (fresh (x y z)
+        (condi$
+          [(any (== x 1) (== x 2)) (any (== y 3) (== y 4)) (any (== z 5) (== z
+6) (== z 7))]
+          [else fail])
+        (== `(,x ,y ,z) q))))
+  '((1 3 5)
+    (2 3 5)
+    (1 4 5)
+    (2 4 5)
+    (1 3 6)
+    (2 3 6)
+    (1 4 6)
+    (2 4 6)
+    (1 3 7)
+    (2 3 7)
+    (1 4 7)
+    (2 4 7)))
+
+(test-check 'alli-4
+  (prefix 100
+    (run-stream (q)
+      (fresh (x y z)
+        (cond@$
+         [(any (== x 1) (== x 2)) (any (== y 3) (== y 4)) (any (== z 5) (== z 6)
+(== z 7))]
+         [(any (== x 1) (== x 2)) (any (== y 3) (== y 4)) (any (== z 5) (== z 6)
+(== z 7))]
+         [else fail])
+        (== `(,x ,y ,z) q))))
+  '((1 3 5)
+    (2 3 5)
+    (1 4 5)
+    (2 4 5)
+    (1 3 6)
+    (2 3 6)
+    (1 4 6)
+    (2 4 6)
+    (1 3 7)
+    (2 3 7)
+    (1 4 7)
+    (2 4 7)
+    (1 3 5)
+    (2 3 5)
+    (1 4 5)
+    (2 4 5)
+    (1 3 6)
+    (2 3 6)
+    (1 4 6)
+    (2 4 6)
+    (1 3 7)
+    (2 3 7)
+    (1 4 7)
+    (2 4 7)))
+
+(test-check 'alli-5
+  (prefix 100
+    (run-stream (q)
+      (fresh (x y z)
+        (condi$
+         [(any (== x 1) (== x 2)) (any (== y 3) (== y 4)) (any (== z 5) (== z 6)
+(== z 7))]
+         [(any (== x 1) (== x 2)) (any (== y 3) (== y 4)) (any (== z 5) (== z 6)
+(== z 7))]
+         [else fail])
+        (== `(,x ,y ,z) q))))
+  '((1 3 5)
+    (1 3 5)
+    (2 3 5)
+    (2 3 5)
+    (1 4 5)
+    (1 4 5)
+    (2 4 5)
+    (2 4 5)
+    (1 3 6)
+    (1 3 6)
+    (2 3 6)
+    (2 3 6)
+    (1 4 6)
+    (1 4 6)
+    (2 4 6)
+    (2 4 6)
+    (1 3 7)
+    (1 3 7)
+    (2 3 7)
+    (2 3 7)
+    (1 4 7)
+    (1 4 7)
+    (2 4 7)
+    (2 4 7)))
+
+(test-check 'alli-6
+  (prefix 100
+    (run-stream (q)
+      (fresh (x y z)
+        (condi$
+         [(any (== x 1) (== x 2)) (any (== y 3) (== y 4)) (any (== z 5) (== z 6)
+(== z 7))]
+         [(any (== x 8) (== x 9)) (any (== y 10) (== y 11)) (any (== z 12) (== z
+13) (== z 14))]
+         [else fail])
+        (== `(,x ,y ,z) q))))
+  '((1 3 5)
+    (8 10 12)
+    (2 3 5)
+    (9 10 12)
+    (1 4 5)
+    (8 11 12)
+    (2 4 5)
+    (9 11 12)
+    (1 3 6)
+    (8 10 13)
+    (2 3 6)
+    (9 10 13)
+    (1 4 6)
+    (8 11 13)
+    (2 4 6)
+    (9 11 13)
+    (1 3 7)
+    (8 10 14)
+    (2 3 7)
+    (9 10 14)
+    (1 4 7)
+    (8 11 14)
+    (2 4 7)
+    (9 11 14)))
+
+'(test-check 'alli-7
+  (prefix 100
+    (run-stream (q)
+      (fresh (x y z)
+        (condi$
+         [(anyi (== x 1) (== x 2)) (anyi (== y 3) (== y 4)) (anyi (== z 5) (== z
+6) (== z 7))]
+         [(anyi (== x 8) (== x 9)) (anyi (== y 10) (== y 11)) (anyi (== z 12)
+(== z 13) (== z 14))]
+         [else fail])
+        (== `(,x ,y ,z) q))))
+  '((1 3 5)
+    (8 10 12)
+    (2 3 5)
+    (9 10 12)
+    (1 4 5)
+    (8 11 12)
+    (2 4 5)
+    (9 11 12)
+    (1 3 6)
+    (8 10 13)
+    (2 3 6)
+    (9 10 13)
+    (1 4 6)
+    (8 11 13)
+    (2 4 6)
+    (9 11 13)
+    (1 3 7)
+    (8 10 14)
+    (2 3 7)
+    (9 10 14)
+    (1 4 7)
+    (8 11 14)
+    (2 4 7)
+    (9 11 14)))
+
+
+'(test-check 'alli-8
+  (prefix 100
+    (run-stream (q)
+      (fresh (x y z)
+        (condi$
+         [(any (== x 1) (== x 2) (== x 3))
+          (any (== y 4) (== y 5) (== y 6))
+          (any (== z 7) (== z 8) (== z 9))]
+         [else fail])
+        (== `(,x ,y ,z) q))))
+  '((1 4 7)
+    (8 10 12)
+    (2 3 5)
+    (9 10 12)
+    (1 4 5)
+    (8 11 12)
+    (2 4 5)
+    (9 11 12)
+    (1 3 6)
+    (8 10 13)
+    (2 3 6)
+    (9 10 13)
+    (1 4 6)
+    (8 11 13)
+    (2 4 6)
+    (9 11 13)
+    (1 3 7)
+    (8 10 14)
+    (2 3 7)
+    (9 10 14)
+    (1 4 7)
+    (8 11 14)
+    (2 4 7)
+    (9 11 14)))
 
