@@ -1,6 +1,6 @@
 ;(load "plshared.ss")
 
-; $Id: kanren.ss,v 3.7 2004/01/08 20:01:23 oleg Exp $
+; $Id: kanren.ss,v 3.8 2004/01/08 20:02:51 oleg Exp $
 
 (define-syntax let-values
   (syntax-rules ()
@@ -2218,7 +2218,7 @@
             [(var? u-term)
              (cond
                [(assq u-term s) => loop]
-               [else (unify-var/value t-var u-term s)])]
+               [else (extend-subst t-var u-term s)])]
             [else (extend-subst t-var u-term s)]))))))
   
 ; ((and (pattern-var? tree2) (assq tree2 env)) => ; tree2 is a bound var
