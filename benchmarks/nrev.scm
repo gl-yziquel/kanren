@@ -4,7 +4,7 @@
 ;
 ;   "naive"-reverse a list of 30 integers
 
-; $Id: nrev.scm,v 1.2 2004/02/21 15:04:30 dfried Exp $
+; $Id: nrev.scm,v 1.3 2004/02/28 03:56:27 oleg Exp $
 ;
 ; SWI-Prolog, (Version 5.0.10), Pentium IV, 2GHz:
 ; ?- time(dobench(10000)).
@@ -111,6 +111,13 @@
 (display "Timing per iterations: ") (display benchmark_count) (newline)
 '(time (do ((i 0 (+ 1 i))) ((>= i benchmark_count))
 	(query (benchmark data _))))
+
+; kanren.ss version 3.45
+; (time (do ((...)) ...))
+;     81 collections
+;     1913 ms elapsed cpu time, including 7 ms collecting
+;     1928 ms elapsed real time, including 16 ms collecting
+;     87397616 bytes allocated, including 87637464 bytes reclaimed
 
 ; dobench(Count) :-
 ; 	data(Data),
