@@ -1,6 +1,6 @@
 ;; http://www.sics.se/quintus/qsort.pl
 
-; $Id: qsort.scm,v 1.1 2004/02/27 04:26:03 webyrd Exp $
+; $Id: qsort.scm,v 1.2 2004/02/27 04:38:59 webyrd Exp $
 
 ;   qsort
 ;
@@ -11,7 +11,7 @@
 (define qsort
   (extend-relation (a1 a2 a3)
     (fact (r) '() r r)
-    (relation (x l r r0)
+    (relation (x l (once r) (once r0))
       (to-show `(,x . ,l) r r0)
       (exists (l1 l2 r1)
         (all
@@ -23,13 +23,13 @@
 (define partition
   (extend-relation (a1 a2 a3 a4)
     (fact () '() _ '() '())
-    (relation (x l y l1 l2)
+    (relation (x l y l1 (once l2))
       (to-show `(,x . ,l) y `(,x . ,l1) l2)
       (all!
        (predicate (x y)
          (<= x y))
        (partition l y l1 l2)))
-    (relation (x l y l1 l2)
+    (relation (x l (once y) (once l1) l2)
       (to-show `(,x . ,l) y l1 `(,x . ,l2))
       (partition l y l1 l2))))
 
