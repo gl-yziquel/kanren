@@ -4,7 +4,7 @@
 ;
 ;   "naive"-reverse a list of 30 integers
 
-; $Id: nrev.scm,v 1.1 2004/02/18 07:32:17 oleg Exp $
+; $Id: nrev.scm,v 1.2 2004/02/21 15:04:30 dfried Exp $
 ;
 ; SWI-Prolog, (Version 5.0.10), Pentium IV, 2GHz:
 ; ?- time(dobench(10000)).
@@ -85,8 +85,8 @@
 	     (exists (l1)
 	       (all!
 		 (nreverse l0 l1)
-		 (let-inject/no-check ((xl (x) (list x)))
-		   (concatenate l1 xl l))))
+                 (project/no-check (x)
+                   (concatenate l1 (list x) l))))
 	     (all!! (== lh '()) (== l '()))))))
       (concatenate
 	(relation (head-let a l2 c)
@@ -94,8 +94,8 @@
 	    (if-only (== a `(,x . ,l1))
 	      (all!
 		(concatenate l1 l2 l3)
-		(let-inject/no-check ((cl (x l3) `(,x . ,l3)))
-		  (== c cl)))
+                (project/no-check (x l3)
+                  (== c `(,x . ,l3))))
 	      (all!! (== a '()) (== l2 c))))))
       )
     (lambda (data out)
