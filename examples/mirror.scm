@@ -1,6 +1,6 @@
 (display "Structural Inductive proof: mirror") (newline)
 ;
-; $Id: mirror.scm,v 1.5 2004/04/09 22:02:50 oleg Exp $
+; $Id: mirror.scm,v 1.6 2004/04/14 20:24:48 oleg Exp $
 
 ; First we need an extendible database of relations.
 ; We should be able to add to the database later on -- extend
@@ -186,7 +186,7 @@
 ; as an eigenvariable (skolem function) rather than a logical variable
 
 (define goal-rev
-  (let* ((sk (symbol-append 'sk ': (gensym)))
+  (let* ((sk (eigen-variable 'sk))
 	 (t1-sk (lambda (t) `(,sk ,t))))
     (lambda (kb)
       (extend-relation (t)

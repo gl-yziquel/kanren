@@ -2,7 +2,7 @@
 ;
 ; The appropriate prelude (e.g., chez-specific.scm) is assumed.
 ;
-; $Id: kanren.ss,v 4.5 2004/04/13 19:18:27 oleg Exp $
+; $Id: kanren.ss,v 4.6 2004/04/14 20:24:59 oleg Exp $
 
 (define-syntax lambda@
   (syntax-rules ()
@@ -1382,11 +1382,12 @@
      (lift-ant-to-rel-aux ant-comb ids () rel ...)]))
 
 ; (let-ants ids ((name rel) ...) body)
+; NB: some macro systems do not like if 'ids' below is replaced by (id ...)
 (define-syntax let-ants
   (syntax-rules ()
-    [(_ (id ...) ((ant-name rel-exp) ...) body)
-     (lambda (id ...)
-       (let ((ant-name (rel-exp id ...)) ...)
+    [(_ ids ((ant-name rel-exp) ...) body)
+     (lambda ids
+       (let ((ant-name (rel-exp . ids)) ...)
          body))]))
 
 ; Unify lifted to be a binary relation
