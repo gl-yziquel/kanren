@@ -5,7 +5,7 @@
 ;   query population and area database to find countries
 ;   of approximately equal population density
 
-; $Id: query.scm,v 1.3 2004/02/28 03:56:27 oleg Exp $
+; $Id: query.scm,v 1.4 2004/03/04 13:48:23 dfried Exp $
 ;
 ; SWI-Prolog, (Version 5.0.10), Pentium IV, 2GHz:
 ; ?- time(dobench(10000)).
@@ -30,27 +30,28 @@
 
 (define benchmark
   (letrec
-    ((bquery
-      (relation (c1 d1 c2 d2)
-	(to-show `(quad ,c1 ,d1 ,c2 ,d2))
-	(all
-	  (density c1 d1)
-	  (density c2 d2)
-	  (predicate (d1 d2)
-	    (and (> d1 d2)
-	      (let ((t1 (* 20 d1))
-		    (t2 (* 21 d2)))
-		(< t1 t2)))))))
-      (density
-	(relation (head-let c d)
-	  (exists (p)
-	    (all
-	      (pop c p)
-	      (exists (a)
-		(all!!
-		  (area c a)
-                  (project (p a)
-                    (== d (* p (/ 100.0 a)))))))))))
+      ((bquery
+         (relation (c1 d1 c2 d2)
+           (to-show `(quad ,c1 ,d1 ,c2 ,d2))
+           (all
+             (density c1 d1)
+             (density c2 d2)
+             (project (d1 d2)
+               (predicate
+                 (and (> d1 d2)
+                      (let ((t1 (* 20 d1))
+                            (t2 (* 21 d2)))
+                        (< t1 t2))))))))
+       (density
+         (relation (head-let c d)
+           (exists (p)
+             (all
+               (pop c p)
+               (exists (a)
+                 (all!!
+                   (area c a)
+                   (project (p a)
+                     (== d (* p (/ 100.0 a)))))))))))
     (lambda (out)
       (bquery out))))
 
@@ -62,11 +63,12 @@
            (all
              (density c1 d1)
              (density c2 d2)
-             (predicate (d1 d2)
-               (and (> d1 d2)
-                    (let ((t1 (* 20 d1))
-                          (t2 (* 21 d2)))
-                      (< t1 t2)))))))
+             (project (d1 d2)
+               (predicate
+                 (and (> d1 d2)
+                      (let ((t1 (* 20 d1))
+                            (t2 (* 21 d2)))
+                        (< t1 t2))))))))
        (density
          (relation (head-let c d)
            (exists (p)
