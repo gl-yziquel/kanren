@@ -1,6 +1,6 @@
 ;(load "plshared.ss")
 
-; $Id: kanren.ss,v 3.42 2004/02/24 04:23:01 oleg Exp $
+; $Id: kanren.ss,v 3.43 2004/02/24 04:30:55 oleg Exp $
 
 (define-syntax let-values
   (syntax-rules ()
@@ -998,7 +998,7 @@
 ; to-show becomes a binding form...
 
 (define-syntax relation
-  (syntax-rules (to-show head-let once)
+  (syntax-rules (to-show head-let once _)
     [(_ (head-let head-term ...) ant)
      (relation-head-let (head-term ...) ant)]
     [(_ (head-let head-term ...))	; not particularly useful without body
@@ -1021,6 +1021,10 @@
     ; generating temp names for each term in the head
     ; don't generate if the term is a variable that occurs in
     ; once-vars
+    ; For _ variables in the pattern, generate unique names for the lambda
+    ; parameters, and forget them
+    [(_ "g" vars once-vars (gs ...) gunis (_ . terms) . ant)
+     (relation "g" vars once-vars (gs ... anon) gunis terms . ant)]
     [(_ "g" vars once-vars (gs ...) gunis (term . terms) . ant)
      (id-memv?? term once-vars 
        ; success continuation: term is a once-var
