@@ -1,6 +1,6 @@
 (display "Structural Inductive proof: mirror") (newline)
 ;
-; $Id: mirror.scm,v 1.2 2004/02/14 00:14:35 oleg Exp $
+; $Id: mirror.scm,v 1.3 2004/03/04 13:39:20 dfried Exp $
 
 ; First we need an extendible database of relations.
 ; We should be able to add to the database later on -- extend
@@ -80,10 +80,11 @@
       (fact (val) `(btree (leaf ,val)))
       (relation (t1 t2)
 	(to-show `(btree (root ,t1 ,t2)))
-	(all
-	  (predicate (t1 t2) (printf "btree ~s ~s ~n" t1 t2))
-	  (kb `(btree ,t1))
-	  (kb `(btree ,t2)))))))
+	(project (t1 t2)
+          (all
+	    (predicate (printf "btree ~s ~s ~n" t1 t2))
+	    (kb `(btree ,t1))
+	    (kb `(btree ,t2))))))))
 
 ;%> (declare mirror ((S) -> ((BTree S)) (BTree S)))
 
