@@ -12,7 +12,7 @@
 ; data([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
 ;                            21,22,23,24,25,26,27,28,29,30]).
 
-; $Id: lips.scm,v 1.2 2004/02/21 15:05:30 dfried Exp $
+; $Id: lips.scm,v 1.3 2004/03/04 13:43:09 dfried Exp $
 
 
 (define nrev
@@ -44,8 +44,8 @@
       (to-show)
       (exists (count)
         (all
-          (predicate () (newline))
-          (predicate () (newline))
+          (predicate (newline))
+          (predicate (newline))
           (eg_count count)
           (bench count)
           fail)))
@@ -111,10 +111,8 @@
     (fact (n) n)
     (relation (n)
       (to-show n)
-      (all
-        (predicate (n) (> n 1))
-        (project (n)
-          (repeat (- n 1)))))))
+      (project (n)
+        (all (> n 1) (repeat (- n 1)))))))
 
 (define report
   (relation (count t0 t1 t2)
@@ -126,9 +124,11 @@
           (let ([time (- time2 time1)])
             (all
               (calculate_lips count time lips units)
-              (predicate (lips count) (printf "~n~s lips for ~s" lips count))
-              (predicate (units)
-                (printf " Iterations taking ~s  ~s ( ~s )~n " time units time)))))))))
+              (project (lips count)
+                (predicate (printf "~n~s lips for ~s" lips count)))
+              (project (units)
+                (predicate
+                  (printf " Iterations taking ~s  ~s ( ~s )~n " time units time))))))))))
 
 (define calculate_lips
   (extend-relation (a1 a2 a3 a4)
