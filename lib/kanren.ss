@@ -1,6 +1,6 @@
 ;(load "plshared.ss")
 
-; $Id: kanren.ss,v 3.34 2004/02/20 15:38:05 dfried Exp $
+; $Id: kanren.ss,v 3.35 2004/02/20 15:39:39 dfried Exp $
 
 (define-syntax let-values
   (syntax-rules ()
@@ -1069,7 +1069,7 @@
        gv-rest ht-rest gvs . ants)]
     [(_ "d" vars others () () gvs . ants)
      (relation-head-let "f" vars others gvs . ants)]
-
+ 
     ; final generation
     [(_ "f" vars ((gv term) ...) gvs) ; no body
      (lambda gvs                                     ; don't bother bind vars
