@@ -51,7 +51,7 @@
 ; This code has been translated to Prolog. The Prolog version has
 ; termination proofs.
 ;
-; $Id: pbamini.scm,v 1.4 2004/08/30 21:53:50 oleg Exp $
+; $Id: pbamini.scm,v 1.5 2004/08/30 21:55:28 oleg Exp $
 
 ; Auxiliary functions to build and show binary numerals
 ;
@@ -142,7 +142,7 @@
       [(== 0 c-in) (== '() m) (pos n) (== n k)]      
       [(== 0 c-in) (== '() n) (pos m) (== m k)]
       [(== 1 c-in) (== '() m) (== '() n) (== '(1) k)]      
-      [(== 1 c-in) (== '() m) (pos m) (adder 0 n '(1) k)]
+      [(== 1 c-in) (== '() m) (pos n) (adder 0 n '(1) k)]
       [(== 1 c-in) (== '() n) (pos m) (adder 0 '(1) m k)]
       [(== '(1) n) (== '(1) m) (gen-adder c-in n n k)]
       [(== '(1) n) (gt1 m) (gen-adder c-in n m k)]
@@ -385,6 +385,19 @@
           (once
             (fresh (x y z)
               (adder 0 x y z)
+              (== x b)
+              (== y a)
+              (== z c)))))))
+
+(pretty-print
+  (prefix 50
+    (run-stream (q)
+      (fresh (a b c)
+        (adder 1 a b c)
+          (== `(,a ,b ,c) q)
+          (once
+            (fresh (x y z)
+              (adder 1 x y z)
               (== x b)
               (== y a)
               (== z c)))))))
