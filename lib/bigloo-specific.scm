@@ -1,6 +1,6 @@
 ; KANREN prelude specific to Bigloo-Scheme
 ;
-; $Id: bigloo-specific.scm,v 4.1 2004/04/09 23:32:38 oleg Exp $
+; $Id: bigloo-specific.scm,v 4.2 2004/04/10 02:47:21 oleg Exp $
 
 (define bigloo-error error)
 (define error
@@ -44,7 +44,7 @@
       ((eqv? el (car lst)) (loop (cdr lst)))
       (else (cons (car lst) (loop (cdr lst)))))))
 (define pretty-print pp)
-(define (time . args) #f)
+(define (time v) v)
 
 (define (printf . args) (apply print args))
 

@@ -1,6 +1,6 @@
 ; Type Inference
 ;
-; $Id: type-inference.scm,v 1.7 2004/04/09 23:32:38 oleg Exp $
+; $Id: type-inference.scm,v 1.8 2004/04/10 02:47:21 oleg Exp $
 
 (display "Type inference") (newline)
 
@@ -453,7 +453,7 @@
        (local-vars (condition ...) conseq)
        clause ...)
       (let-lv local-vars			; a bit sloppy, need exists...
-	(printf "running ~a~n" '(condition ...))
+	(cout "running " '(condition ...) nl)
 	(@ (all!! condition ...)
 	; sk
 	  (lambda@ (fk-ign)
@@ -541,9 +541,13 @@
     ((v) ((== exp `(var ,v)))
       succeed)))
 
-(pretty-print (expand '(relation-cond (g exp t)
-    ((v) ((== exp `(var ,v)))
-      succeed))))
+(cond-expand
+  (chez
+    (pretty-print (expand '(relation-cond (g exp t)
+			     ((v) ((== exp `(var ,v)))
+			       succeed))))
+    )
+  (else #f))
 
 (test-check 'with-robust-syntax-but-long-jumps/poly-let
   (solution (?)
