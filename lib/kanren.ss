@@ -1,6 +1,6 @@
 ;(load "plshared.ss")
 
-; $Id: kanren.ss,v 3.13 2004/01/23 00:00:39 oleg Exp $
+; $Id: kanren.ss,v 3.14 2004/01/23 00:02:03 oleg Exp $
 
 (define-syntax let-values
   (syntax-rules ()
@@ -1563,6 +1563,20 @@
     (if (var? t)
       (error 'nonvar! "Logic variable ~s found after substituting." (concretize t))
       t)))
+
+; TRACE-VARS TITLE (VAR ...)
+; Is a deterministic antecedent that prints the current values of VARS
+; TITLE is any displayable thing.
+
+(define-syntax trace-vars
+  (syntax-rules ()
+    ((trace-vars title (var ...))
+      (promise-one-answer
+	(predicate/no-check (var ...)
+	  (begin (display title) (display " ")
+	    (display '(var ...)) (display " ") (display (list var ...))
+	    (newline)))))))
+
 
 (define grandpa
   (relation (grandad grandchild)
