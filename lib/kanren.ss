@@ -2,7 +2,7 @@
 ;
 ; The appropriate prelude (e.g., chez-specific.scm) is assumed.
 ;
-; $Id: kanren.ss,v 4.4 2004/04/10 02:47:21 oleg Exp $
+; $Id: kanren.ss,v 4.5 2004/04/13 19:18:27 oleg Exp $
 
 (define-syntax lambda@
   (syntax-rules ()
@@ -1361,10 +1361,10 @@
 
 (define-syntax lift-ant-to-rel-aux
   (syntax-rules ()
-    [(_ ant-handler (id ...) ([g rel-var] ...))
+    [(_ ant-handler ids ([g rel-var] ...))
      (let ([g rel-var] ...)
-       (lambda (id ...)
-         (ant-handler (g id ...) ...)))]
+       (lambda ids
+         (ant-handler (g . ids) ...)))]
     [(_ ant-handler ids (let-pair ...) rel-exp0 rel-exp1 ...)
      (lift-ant-to-rel-aux ant-handler ids 
        (let-pair ... [g rel-exp0]) rel-exp1 ...)]))
