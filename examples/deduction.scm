@@ -23,7 +23,7 @@
 ; The meta-object machinery to build a prover is explained in the
 ; proof of mirror.
 ;
-; $Id: deduction.scm,v 1.9 2004/04/10 02:47:21 oleg Exp $
+; $Id: deduction.scm,v 1.10 2004/04/15 04:48:05 oleg Exp $
 
 (newline)
 (display "Inductive proof of the Deduction Theorem for Hilbert Prop Calc")
@@ -126,7 +126,7 @@
 
 (define ind-kb-gen
   (lambda (t)
-    (let-lv (ind)
+    (exists (ind)
       (all! (== t ind)
 	(lambda@ (sk fk subst)
 	  (let* ([indc (subst-in ind subst)]
