@@ -1,6 +1,7 @@
+;Soon to create two load-alls.
 ;(load "plshared.ss")
 
-; $Id: kanren.ss,v 3.20 2004/02/10 19:14:35 oleg Exp $
+; $Id: kanren.ss,v 3.21 2004/02/10 23:39:23 dfried Exp $
 
 (define-syntax let-values
   (syntax-rules ()
