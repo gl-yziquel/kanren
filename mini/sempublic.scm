@@ -1,5 +1,5 @@
 ;;; all_2 succeed
-(load "minikanrensupport.scm")
+;(load "minikanrensupport.scm")
 
 ;;; working version
 (define with-sk
@@ -91,13 +91,11 @@
   (syntax-rules ()
     [(_ a b c)
      (lambda@ (sk fk s)
-       (let ([a-res (@ a (lambda@ (fk s) (cons s fk)) (lambda () #f)
-  s)])
+       (let ([a-res (@ a (lambda@ (fk s) (cons s fk)) (lambda () #f) s)])
          (if a-res
              (let loop ([a-res a-res])
                (cond
-                 [a-res (@ b sk (lambda () (loop ((cdr a-res)))) (car
-  a-res))]
+                 [a-res (@ b sk (lambda () (loop ((cdr a-res)))) (car a-res))]
                  [else (fk)]))
              (@ c sk fk s))))]))
 
@@ -162,8 +160,7 @@
 (define-syntax once-aux
   (syntax-rules ()
     ((_ sk fk a) (@ a (lambda (fk^) (sk fk)) fk))
-    ((_ sk fk a a* ...) (@ a (lambda (fk^) (once-aux sk fk a* ...))
-  fk))))
+    ((_ sk fk a a* ...) (@ a (lambda (fk^) (once-aux sk fk a* ...)) fk))))
        
 ;;; This does not change
 
@@ -211,14 +208,19 @@
       ((null? strm) #f)
       (else (reify-answer (car strm))))))
 
-(define-syntax run-stream
+(define-syntax run-stream ;;; okay
   (syntax-rules ()
     ((_ (x) a* ...)
-     (let ((x (var (quote x))))
+     (let ((x (var 'x)))
        (@ (all a* ...)
-         (lambda@ (fk s) (cons (cons x s) fk))
-         (lambda@ () (quote ()))
-         empty-s)))))
+          (lambda@ (fk s)
+            (cons (answer x s) fk))
+          (lambda@ () '())
+          empty-s)))))
+
+(define answer
+  (lambda (x s)
+    (subst-in x s)))
 
 ;;; run-stream
 
@@ -230,7 +232,7 @@
 (define-syntax run$ ;;; okay
   (syntax-rules ()
     ((_ (x) a a* ...)
-     (prefix 10 (run-stream (x) a a* ...)))))
+     (prefix 10 (run-stream (x) (all a a* ...))))))
 
 ;;; a stream is either empty or a pair whose cdr is 
                 ;;; a function of no arguments that returns a stream.
@@ -430,8 +432,7 @@
        (lambda (s)
          (fresh ()
            a* ...
-           (projectf (x* ...) (lambda (g* ...) (all s (== g* x*)
-  ...))))))]
+           (projectf (x* ...) (lambda (g* ...) (all s (== g* x*) ...))))))]
     [(_ (g* ...) (y y* ...) (x* ...) a* ...)
      (forget-me-not-aux (g* ... h) (y* ...) (x* ...) a* ...)]))
        
