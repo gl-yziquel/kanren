@@ -5,7 +5,7 @@
 ;   query population and area database to find countries
 ;   of approximately equal population density
 
-; $Id: query.scm,v 1.4 2004/03/04 13:48:23 dfried Exp $
+; $Id: query.scm,v 1.5 2004/03/19 23:36:41 oleg Exp $
 ;
 ; SWI-Prolog, (Version 5.0.10), Pentium IV, 2GHz:
 ; ?- time(dobench(10000)).
@@ -191,6 +191,12 @@
 ;     1275 ms elapsed cpu time, including 9 ms collecting
 ;     1312 ms elapsed real time, including 7 ms collecting
 ;     57261352 bytes allocated, including 56455376 bytes reclaimed
+;
+; kanren.ss version 4.0
+;     39 collections
+;     904 ms elapsed cpu time, including 7 ms collecting
+;     914 ms elapsed real time, including 6 ms collecting
+;     41670216 bytes allocated, including 42439072 bytes reclaimed
 
 ; dobench(Count) :-
 ; 	data(Data),
