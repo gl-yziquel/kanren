@@ -1,6 +1,6 @@
 (cout nl "Structural Inductive proof: mirror" nl)
 ;
-; $Id: mirror.scm,v 1.10 2005/02/05 05:26:01 oleg Exp $
+; $Id: mirror.scm,v 1.11 2005/02/05 05:57:37 oleg Exp $
 
 ; First we need an extendible database of relations.
 ; We should be able to add to the database later on -- extend
@@ -18,13 +18,13 @@
 ; First, we need to look up a key (foo 3) in the database. If the
 ; lookup fails, so does our query. If the lookup succeeds, we get
 ; a procedure of three arguments. We apply this procedure to
-; ?a, ?b, and ?c and obtain an antecedent, which we can 'solve'
+; ?a, ?b, and ?c and obtain an goal, which we can 'solve'
 ; as usual.
 
 ; In the following, we chose a different approach. We represent the database
 ; of relations as a relation itself -- we will call it KB. That
-; relation takes one argument -- the term to prove, and returns an antecedent
-; that represents the answer (that antecedent may be 'fail').
+; relation takes one argument -- the term to prove, and returns an goal
+; that represents the answer (that goal may be 'fail').
 ; A database of one fact
 ;  foo(a,b,c).
 ; in Prolog notation will be represented in our approach as a relation

@@ -30,7 +30,7 @@
 ; constructive. So, our arithmetic relations are not only pure
 ; and sound but also complete.
 ;
-; $Id: pure-arithm.scm,v 1.3 2004/06/17 21:32:52 oleg Exp $
+; $Id: pure-arithm.scm,v 1.4 2005/02/05 05:57:37 oleg Exp $
 
 ; Auxiliary functions to build and show Peano numerals
 ; ()          represents 0
@@ -134,8 +134,8 @@
 
 (define-syntax test
   (syntax-rules ()
-    ((_ (x) ant)
-      (query (redok subst x) ant
+    ((_ (x) gl)
+      (query (redok subst x) gl
 	(display (trans (subst-in x subst)))
 	(newline)))))
 

@@ -4,7 +4,7 @@
 ;
 ;   "naive"-reverse a list of 30 integers
 
-; $Id: nrev.scm,v 1.10 2005/02/03 03:30:40 oleg Exp $
+; $Id: nrev.scm,v 1.11 2005/02/05 05:57:37 oleg Exp $
 ;
 ; SWI-Prolog, (Version 5.0.10), Pentium IV, 2GHz:
 ; ?- time(dobench(10000)).
@@ -82,7 +82,7 @@
 	     (exists (l1)
 	       (all!
 		 (nreverse l0 l1)
-		 (trace-ant-raw 'cc (concatenate l1 (list x) l))))
+		 (trace-goal-raw 'cc (concatenate l1 (list x) l))))
 	     (all!! (== lh '()) (== l '()))))))
       (concatenate
 	(relation (head-let a l2 c)

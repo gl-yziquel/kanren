@@ -15,7 +15,7 @@
 ; latter approach is similar to that of inductive proofs (see files
 ; ./deduction.scm and ./mirror-equ.scm)
 ;
-; $Id: type-inference.scm,v 1.18 2005/02/05 05:26:01 oleg Exp $
+; $Id: type-inference.scm,v 1.19 2005/02/05 05:57:38 oleg Exp $
 
 (display "Type inference") (newline)
 
@@ -80,7 +80,7 @@
 ; The association '(<var-name> generic <type-gen>)' asserts that
 ; <var-name> is given a _generic_ type. <type-gen> then is a
 ; predicate of arity 1. To be more precise, (<type-gen> <type>)
-; is an antecedent that succeeds or fails depending on the fact if
+; is an goal that succeeds or fails depending on the fact if
 ; <type> is an instance of a generic type represented by <type-gen>.
 ; 
 ; This is precisely the logical meaning of generalization, as

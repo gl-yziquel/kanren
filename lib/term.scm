@@ -60,7 +60,7 @@
 ; That property is guaranteed by the unifier. That property lets us
 ; build an inverse index to find the equivalence class of x.
 ;
-; $Id: term.scm,v 4.2 2005/02/05 05:26:02 oleg Exp $
+; $Id: term.scm,v 4.3 2005/02/05 05:57:39 oleg Exp $
 
 
 ;----------------------------------------
@@ -348,8 +348,8 @@
 ; Replace a logical variable with the corresponding eigen-variable
 ; Note: to be really right, universalize should be a scoping predicate,
 ; something like exists:
-; (universalize (term) ant)
-; to prove 'ant' in the env where term is universalized.
+; (universalize (term) goal)
+; to prove 'goal' in the env where term is universalized.
 ; In that case, the introduced eigen-variables do not escape.
 ; Also, perhaps universalize should take a subst and first
 ; do (subst-in term subst) and then universalize the remaining
