@@ -1,5 +1,7 @@
 ;; http://www.sics.se/quintus/primes.pl
 
+; $Id: primes.scm,v 1.3 2004/02/27 01:34:16 dfried Exp $
+
 (define primes
   (relation (head-let limit ps)
     (exists (ls)

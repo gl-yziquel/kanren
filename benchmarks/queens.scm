@@ -1,6 +1,8 @@
 ;;http://www.sics.se/quintus/queens.pl
 ;;9-queens program
 
+; $Id: queens.scm,v 1.3 2004/02/27 01:35:15 dfried Exp $
+
 (define queen
   (relation ((once out) (once data))
     (to-show data out)
