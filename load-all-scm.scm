@@ -1,5 +1,5 @@
 ; Load everything (for interactive use: SCM Scheme)
-; $Id: load-all-scm.scm,v 1.1 2004/04/10 02:47:20 oleg Exp $
+; $Id: load-all-scm.scm,v 1.2 2004/07/23 18:24:16 oleg Exp $
 
 ; For historical reasons, KANREN code uses square brackets, which
 ; SCM does not understand, natively. So, we have to modify load
@@ -35,4 +35,5 @@
 (load "examples/mirror.scm")
 (load "examples/mirror-equ.scm")
 (load "examples/deduction.scm")
+(load "examples/pure-bin-arithm.scm")
 ;(load "benchmarks/alg-complexity.scm") ; must be last

@@ -1,5 +1,5 @@
 ; Load everything (for interactive use)
-; $Id: load-all.ss,v 1.7 2004/04/09 23:32:38 oleg Exp $
+; $Id: load-all.ss,v 1.8 2004/07/23 18:24:16 oleg Exp $
 
 (load "lib/chez-specific.ss")
 (load "lib/kanren.ss")
@@ -9,4 +9,5 @@
 (load "examples/mirror.scm")
 (load "examples/mirror-equ.scm")
 (load "examples/deduction.scm")
+(load "examples/pure-bin-arithm.scm")
 ;(load "benchmarks/alg-complexity.scm") ; must be last
