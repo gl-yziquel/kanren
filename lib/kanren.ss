@@ -1,6 +1,6 @@
 ;(load "plshared.ss")
 
-; $Id: kanren.ss,v 3.27 2004/02/14 00:14:35 oleg Exp $
+; $Id: kanren.ss,v 3.28 2004/02/16 05:44:04 oleg Exp $
 
 (define-syntax let-values
   (syntax-rules ()
@@ -1447,13 +1447,9 @@
   (solve 4 (x) (grandpa 'sam x))
   '(((x.0 sal)) ((x.0 pat))))
 
-(define-syntax fact
-  (syntax-rules ()
-    [(_ (var0 ...) x ...) (relation (var0 ...) (to-show x ...))]))
-
-(define-syntax trace-fact
-  (syntax-rules ()
-    [(_ id (var0 ...) x ...) (trace-relation id (to-show (var0 ...) x ...))]))
+; (define-syntax trace-fact
+;   (syntax-rules ()
+;    [(_ id (var0 ...) x ...) (trace-relation id (to-show (var0 ...) x ...))]))
 
 (define father
   (extend-relation (a1 a2)
