@@ -2,7 +2,7 @@
 ;
 ; The appropriate prelude (e.g., chez-specific.scm) is assumed.
 ;
-; $Id: kanren.ss,v 4.15 2004/10/12 04:37:43 oleg Exp $
+; $Id: kanren.ss,v 4.16 2004/11/11 21:40:08 oleg Exp $
 
 (define-syntax lambda@
   (syntax-rules ()
@@ -3814,7 +3814,7 @@
 				      (+ counter 1) subst)])
 			     (@ ant sk fk s)))))]
 		[else
-		  (let ([s (extend-subst depth-counter-var 0 subst)])
+		  (let ([s (extend-subst depth-counter-var 1 subst)])
 		    (@ ant sk fk s))]))))))
     ))
 
