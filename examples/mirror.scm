@@ -1,6 +1,6 @@
 (cout nl "Structural Inductive proof: mirror" nl)
 ;
-; $Id: mirror.scm,v 1.7 2004/04/14 21:43:57 oleg Exp $
+; $Id: mirror.scm,v 1.8 2004/04/28 19:01:20 oleg Exp $
 
 ; First we need an extendible database of relations.
 ; We should be able to add to the database later on -- extend
@@ -218,7 +218,7 @@
 
 ; extend the kb with the list of assumptions
 ; this is just like 'any' only it's a procedure rather than a syntax
-; Why we need concretize*?
+; Why we need universalize?
 ; Suppose, the list of facts includes
 ;	(fact (x) (foo x)) and (fact (x) (bar x))
 ; definitely, we do not want to imply that facts foo and bar _share_
