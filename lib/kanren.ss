@@ -2,7 +2,7 @@
 ;
 ; The appropriate prelude (e.g., chez-specific.scm) is assumed.
 ;
-; $Id: kanren.ss,v 4.11 2004/05/01 04:14:53 oleg Exp $
+; $Id: kanren.ss,v 4.12 2004/05/10 21:45:53 oleg Exp $
 
 (define-syntax lambda@
   (syntax-rules ()
@@ -2090,11 +2090,6 @@
 (test-check 'test-grandpa-13
   (solve 10 (x y) (grandpa x y))
   '(((x.0 jon) (y.0 rob)) ((x.0 jon) (y.0 roz))))
-
-(define instantiated
-  (lambda (t)
-    (project/no-check (t)
-      (predicate (not (var? t))))))
 
 (define view-subst
   (lambda (t)
