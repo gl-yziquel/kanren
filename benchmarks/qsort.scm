@@ -1,6 +1,6 @@
 ;; http://www.sics.se/quintus/qsort.pl
 
-; $Id: qsort.scm,v 1.2 2004/02/27 04:38:59 webyrd Exp $
+; $Id: qsort.scm,v 1.3 2004/03/04 13:46:15 dfried Exp $
 
 ;   qsort
 ;
@@ -26,8 +26,7 @@
     (relation (x l y l1 (once l2))
       (to-show `(,x . ,l) y `(,x . ,l1) l2)
       (all!
-       (predicate (x y)
-         (<= x y))
+       (project (x y) (predicate (<= x y)))
        (partition l y l1 l2)))
     (relation (x l (once y) (once l1) l2)
       (to-show `(,x . ,l) y l1 `(,x . ,l2))
