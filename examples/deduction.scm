@@ -23,7 +23,7 @@
 ; The meta-object machinery to build a prover is explained in the
 ; proof of mirror.
 ;
-; $Id: deduction.scm,v 1.1 2004/01/23 00:03:05 oleg Exp $
+; $Id: deduction.scm,v 1.2 2004/01/28 04:04:03 oleg Exp $
 
 (newline)
 (display "Inductive proof of the Deduction Theorem for Hilbert Prop Calc")
@@ -108,7 +108,7 @@
 ; relation 'prf' in a very special knowledge database. The knowledge base
 ; assumes reports the success of every relation in it. It also
 ; binds all the free variables in the asked relation to some distinguished
-; symbols (we chose the explanation mark to distinguish such names).
+; symbols (we chose the exclamation mark to distinguish such names).
 ; Thus we replace free variables with eigen-variables.
 ; We thus generate _universal_ induction hypotheses.
 ; Note that this special 'kb' is only used inductively in prf.
