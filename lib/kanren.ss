@@ -1,6 +1,6 @@
 ;(load "plshared.ss")
 
-; $Id: kanren.ss,v 3.39 2004/02/23 21:26:37 oleg Exp $
+; $Id: kanren.ss,v 3.40 2004/02/23 22:55:27 oleg Exp $
 
 (define-syntax let-values
   (syntax-rules ()
@@ -1008,12 +1008,12 @@
     ; generating temp names for each term in the head
     ; don't generate if the term is a variable that occurs in
     ; once-vars
-    [(_ "g" vars once-vars (gs ...) (gunis ...) (term . terms) . ant)
+    [(_ "g" vars once-vars (gs ...) gunis (term . terms) . ant)
      (id-memv?? term once-vars 
        ; success continuation: term is a once-var
-       (relation "g" vars once-vars (gs ... term) (gunis ...) terms . ant)
+       (relation "g" vars once-vars (gs ... term) gunis terms . ant)
        ; failure continuation: term is not a once-var
-       (relation "g" vars once-vars (gs ... g) (gunis ... (g . term))
+       (relation "g" vars once-vars  (gs ... g) ((g . term) . gunis) 
 	 terms . ant))]
     [(_ "g" vars once-vars gs gunis () . ant)
      (relation "f" vars gs gunis . ant)]
