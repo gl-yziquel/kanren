@@ -23,7 +23,7 @@
 ; The meta-object machinery to build a prover is explained in the
 ; proof of mirror.
 ;
-; $Id: deduction.scm,v 1.5 2004/02/14 00:42:29 oleg Exp $
+; $Id: deduction.scm,v 1.6 2004/03/04 13:33:30 dfried Exp $
 
 (newline)
 (display "Inductive proof of the Deduction Theorem for Hilbert Prop Calc")
@@ -52,7 +52,7 @@
 	  (kb `(wff ,w2))))
       (relation (w)
 	(to-show `(wff ,w))
-	(predicate (w) (string? w)))
+	(project (w) (predicate (string? w))))
       )))
 
 ; The proof is formed from axiom schemas K, S, Cp, Hyp
@@ -175,9 +175,10 @@
 
 (define eigenvar?
   (lambda (x)
-    (predicate (x)
-      (and (symbol? x)
-	(eqv? #\! (string-ref (symbol->string x) 0))))))
+    (project (x)
+      (predicate
+        (and (symbol? x)
+             (eqv? #\! (string-ref (symbol->string x) 0)))))))
 
 (define ind-kb-test
   (extend-relation (t)
@@ -579,10 +580,10 @@
 		   (relation (a b a1 a2 a1l a2l b1 b2 bl h)
 		     (to-show `(subset ,a ,b))
 		     (all!
-		       (predicate/no-check (a)
-			 (and (not (var? a)) (symbol? a)))
-		       (predicate/no-check (b)
-			 (and (not (var? b)) (symbol? b)))
+		       (project/no-check (a)
+                         (predicate (and (not (var? a)) (symbol? a))))
+		       (project/no-check (b)
+			 (predicate (and (not (var? b)) (symbol? b))))
 		       (kb `(union ,a1 ,a2 ,a))
 		       (kb `(subset ,a1 ,a1l))
 		       (kb `(subset ,a2 ,a2l))
