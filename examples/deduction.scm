@@ -23,7 +23,7 @@
 ; The meta-object machinery to build a prover is explained in the
 ; proof of mirror.
 ;
-; $Id: deduction.scm,v 1.7 2004/04/09 22:02:50 oleg Exp $
+; $Id: deduction.scm,v 1.8 2004/04/09 23:32:38 oleg Exp $
 
 (newline)
 (display "Inductive proof of the Deduction Theorem for Hilbert Prop Calc")
@@ -491,14 +491,15 @@
 	       (cond
 		 [(null? subst) '()]
 		 [else
-		   (let ([comm (car subst)])
-		     (let-values (cv new-env)
-		       (concretize-var (commitment->var comm) env)
-		       (let-values (ct newer-env)
-			 (concretize-term (commitment->term comm) new-env)
-			 (cons
-			   (list cv ct)
-			   (cs (cdr subst) newer-env)))))]))])
+		   (let*-values
+		     ([(comm) (car subst)]
+		      [(cv new-env)
+			(concretize-var (commitment->var comm) env)]
+		      [(ct newer-env)
+			(concretize-term (commitment->term comm) new-env)])
+		     (cons
+		       (list cv ct)
+		       (cs (cdr subst) newer-env)))]))])
 	(lambda (subst)
 	  (cs (flatten-subst subst) '()))))
     
