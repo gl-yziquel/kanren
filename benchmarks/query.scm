@@ -5,7 +5,7 @@
 ;   query population and area database to find countries
 ;   of approximately equal population density
 
-; $Id: query.scm,v 1.5 2004/03/19 23:36:41 oleg Exp $
+; $Id: query.scm,v 1.6 2004/04/14 21:58:08 oleg Exp $
 ;
 ; SWI-Prolog, (Version 5.0.10), Pentium IV, 2GHz:
 ; ?- time(dobench(10000)).
@@ -179,10 +179,10 @@
     ((out.0 (quad "ethiopia" 77.71428571428571 "mexico" 76.04712041884817)))))
 
 ; Evaluate the following to see the resulting substitutions
-'(query (benchmark _))
+'(query (k subst) (benchmark _) subst)
 
 (display "Timing per iterations: ") (display benchmark_count) (newline)
-'(time (do ((i 0 (+ 1 i))) ((>= i benchmark_count))
+(time (do ((i 0 (+ 1 i))) ((>= i benchmark_count))
 	(solve 5 (out) (benchmark out))))
 
 ; kanren.ss version 3.45
