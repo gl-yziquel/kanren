@@ -1,6 +1,6 @@
 ;(load "plshared.ss")
 
-; $Id: kanren.ss,v 3.48 2004/03/04 13:51:39 dfried Exp $
+; $Id: kanren.ss,v 3.49 2004/03/06 01:32:09 dfried Exp $
 
 (define-syntax let-values
   (syntax-rules ()
@@ -1421,7 +1421,8 @@
      (let-lv (var0 ...)
        (map (lambda (subst)
 	      (concretize-subst/vars subst var0 ...))
-         (stream-prefix (- n 1) (query ant))))]))
+         (if (= n 0) '()
+           (stream-prefix (- n 1) (query ant)))))]))
 
 (define sam/rob
   (relation ()
