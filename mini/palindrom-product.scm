@@ -29,7 +29,7 @@
 ; is just the fancy way of saying ``exists k. condition''
 ; (or, in Kanren terms, (fresh (k) condition)). There are 279 solutions.
 ;
-; $Id: palindrom-product.scm,v 1.1 2005/05/06 02:59:02 oleg Exp $
+; $Id: palindrom-product.scm,v 1.2 2005/05/13 22:34:47 oleg Exp $
 
 ; We give two solution, both of which rely on the pure arithmetics.
 ;
@@ -148,6 +148,7 @@
       )
 
     (once
+      (project (sum) ; saves one collection: 1619 rather than 1620...
       (fresh (xyz)
 	; first, we limit xyz by range. Separate bits of xyz are
 	; not instantiated...
@@ -165,7 +166,7 @@
 	; Now, we check that xyz is really in range [100..999]
 	; and that k is within [10..90]
 	(<o xyz (build 1000))
-	(<o (build 99) xyz)))
+	(<o (build 99) xyz))))
 
     (== q sum)))
 
