@@ -9,7 +9,7 @@
 ;
 ; This version implements the equations from FBackTrack.hs
 ;
-; $Id: book-si.scm,v 1.6 2005/08/30 05:03:32 oleg Exp $
+; $Id: book-si.scm,v 1.7 2005/08/30 05:24:39 oleg Exp $
 
 ; Constructors
 (define-syntax mzero
@@ -326,6 +326,14 @@
       (cond
         ((unify v w s) => succeed)
         (else (fail s))))))
+
+(define ==-check
+  (lambda (v w)
+    (lambdag@ (s)
+      (cond
+        ((unify-check v w s) => succeed)
+        (else (fail s))))))
+
 
 (define-syntax fresh
   (syntax-rules ()
