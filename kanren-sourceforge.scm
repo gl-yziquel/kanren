@@ -1,5 +1,5 @@
 ; Evaluation of this file yields an HTML document
-; $Id: kanren-sourceforge.scm,v 4.51 2005/09/10 01:19:58 oleg Exp $
+; $Id: kanren-sourceforge.scm,v 4.52 2005/10/08 04:07:26 oleg Exp $
 
 (define Content
 '(html:begin
@@ -139,6 +139,12 @@ miniKANREN tutorials. Incidentally, miniKANREN is quite efficient.")
       (dt (cvs-ref "mini/mk.scm"))
       (dd "The complete implementation (used in the book).")
 
+      (dt (cvs-ref "mini/mkextraforms.scm"))
+      (dd "Extra forms appearing in the framenotes of the book.")
+
+      (dt (cvs-ref "mini/mkprelude.scm"))
+      (dd "Useful definitions from the book.")
+
       (dt (cvs-ref "mini/mktests.scm"))
       (dd "All the examples used in the book.")
     )
@@ -148,7 +154,7 @@ miniKANREN tutorials. Incidentally, miniKANREN is quite efficient.")
    (Section 3 "Documentation" " and tutorials")
 
   (p (em "The Reasoned Schemer") (br)
-    "Daniel P. Friedman and William E. Byrd and Oleg Kiselyov" (br)
+    "Daniel P. Friedman, William E. Byrd and Oleg Kiselyov" (br)
     "MIT Press, Cambridge, MA, 2005.")
 
 ;    (dl
