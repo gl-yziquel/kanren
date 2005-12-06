@@ -1,5 +1,5 @@
 ; Evaluation of this file yields an HTML document
-; $Id: kanren-sourceforge.scm,v 4.52 2005/10/08 04:07:26 oleg Exp $
+; $Id: kanren-sourceforge.scm,v 4.53 2005/12/06 05:44:38 oleg Exp $
 
 (define Content
 '(html:begin
@@ -7,7 +7,7 @@
    (title "A declarative logic programming system")
    (description "An applicative logic programming system with a
 declarative set-theoretical semantics, and its applications")
-   (Date-Revision-yyyymmdd "20050909")
+   (Date-Revision-yyyymmdd "20051205")
    (Date-Creation-yyyymmdd "20040121")
    (keywords "Logic Programming, meta-logic programming, relations,
 iterative deepening, proof assistant, Scheme")
@@ -207,7 +207,8 @@ distributed under the MIT license.")
    (p
      "mini-KANREN has been tested on the following Scheme systems:"
      (br)
-     "Petite Chez Scheme, Chez Scheme, SCM, Gauche, PLT Scheme")
+     "Petite Chez Scheme, Chez Scheme, SCM, Gauche, 
+PLT Scheme/DrScheme v209 and v299.400.")
 
    (Section 3 "Distributions")
    (p "KANREN download site at SourceForge:"
