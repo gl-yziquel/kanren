@@ -9,7 +9,7 @@
 ;
 ; This version implements the equations from FBackTrack.hs
 ;
-; $Id: book-si.scm,v 1.7 2005/08/30 05:24:39 oleg Exp $
+; $Id: book-si.scm,v 1.8 2006/01/10 05:08:54 oleg Exp $
 
 ; Constructors
 (define-syntax mzero
@@ -109,7 +109,7 @@
 
 (define mplus
   (lambda (r f)
-    (mplus-aux 5 r f)))
+    (mplus-aux 1 r f)))
 
 (define mplus-aux
   (lambda (n r f)
