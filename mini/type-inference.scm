@@ -38,7 +38,7 @@
 ; Add call/cc or abort as a primitive, and try to generate some formulas
 ; from classical logic.
 
-; $Id: type-inference.scm,v 1.7 2006/01/10 05:08:54 oleg Exp $
+; $Id: type-inference.scm,v 1.8 2006/01/10 09:44:48 oleg Exp $
 
 
 (load "book-si.scm")			; Our complete evaluator
@@ -141,7 +141,7 @@
       ((either) 
        `(either (,(car (cadr e))
 		 ,(unparse (cadr (cadr e))))
-          ,(unparse (caddr e))))
+          ,(unparse (caddr e)) ,(unparse (cadddr e))))
       ((app) (cdr (fmap e)))))
 
 
@@ -612,7 +612,7 @@ monad" nl)
 ; The above prevents call-by-name redexes. We may wish to exclude only CBV
 ; redexes (lambdas and variables in the operand position). It is interesting
 ; how it changes the result...
-(define app-rel
+(define appn-rel
   (lambda (s!-)
     (let ((!- (s!- s!-)))
       (lambda (e t)
@@ -622,6 +622,7 @@ monad" nl)
 		            (else (== rator `(app . ,_)))))
 	  (!- rator `(,t-rand -> . ,t))
 	  (!- rand t-rand))))))
+(define c!- (make-! lambda-rel appn-rel))
 
 (cout nl "bind" nl)
 (cout
