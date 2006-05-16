@@ -11,7 +11,7 @@
 ; and so the de-typechecker is a theorem prover for the fragment of
 ; intuitionistic predicate logic where all terms are in prenex form.
 
-; $Id: logic.scm,v 1.2 2006/01/26 22:32:13 oleg Exp $
+; $Id: logic.scm,v 1.3 2006/05/16 00:37:56 oleg Exp $
 
 (load "type-inference.scm")
 
@@ -265,3 +265,14 @@
 
 ; which proves TR( NOT A | A ). That is, we get the Law of Excluded Middle.
 
+; A simpler proof: rather than pushing all NOTs down, we can just
+; use the double-negated classical formula as it is, without futher
+; transformations. Glivenko theorem applies to arbitrary propositional
+; formulas.
+; Thanks to Eijiro Sumii for pointing this out.
+(test-check "LEM simpler"
+  (time 
+    (map unparse 
+      (run 1 (q) (c!- q (neg (neg `(a + ,(neg 'a))))))))
+  '((lambda (_.0) (_.0 (inr (lambda (_.1) (_.0 (inl _.1)))))))
+)
