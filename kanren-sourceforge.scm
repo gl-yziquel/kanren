@@ -1,5 +1,5 @@
 ; Evaluation of this file yields an HTML document
-; $Id: kanren-sourceforge.scm,v 4.54 2006/01/24 23:44:24 oleg Exp $
+; $Id: kanren-sourceforge.scm,v 4.55 2006/07/13 22:21:22 oleg Exp $
 
 (define Content
 '(html:begin
@@ -236,9 +236,10 @@ PLT Scheme/DrScheme v209 and v299.400.")
 documentation, a tutorial, validation tests, as well as several sample
 applications.")
   (p "You can "
-     (a (@ (href "http://cvs.sourceforge.net/viewcvs.py/kanren"))
+     (a (@ (href "http://kanren.cvs.sourceforge.net/kanren"))
 	"browse the files in the CVS tree")
      " from any web browser.")
+
 
 
 ;    (dl
