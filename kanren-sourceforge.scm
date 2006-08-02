@@ -1,5 +1,5 @@
 ; Evaluation of this file yields an HTML document
-; $Id: kanren-sourceforge.scm,v 4.55 2006/07/13 22:21:22 oleg Exp $
+; $Id: kanren-sourceforge.scm,v 4.56 2006/08/02 07:28:00 oleg Exp $
 
 (define Content
 '(html:begin
@@ -328,7 +328,7 @@ applications.")
 	 *macro*
 	 . ,(lambda (tag path)
 	      `(a (@ (href 
-		       "http://cvs.sourceforge.net/viewcvs.py/kanren/kanren/"
+		       "http://kanren.cvs.sourceforge.net/kanren/kanren/"
 		       ,path))
 		 (code ,path))))
 
