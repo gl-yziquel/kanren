@@ -109,7 +109,7 @@
 
 ; There is a Prolog version of this code, which has termination proofs.
 ;
-; $Id: pure-bin-arithm.scm,v 4.51 2005/03/04 23:43:03 oleg Exp $
+; $Id: pure-bin-arithm.scm,v 4.52 2009/03/11 04:12:37 oleg Exp $
 
 ; Auxiliary functions to build and show binary numerals
 ;
@@ -817,7 +817,7 @@
 	  (++o nw1 '(1) nw)
 	  (divo nw bw ql1 _)		; low boundary on q:
 	  (++o ql '(1) ql1)		; |n| = |b|(ql+1) + c
-	  (any (== q ql) (<ol ql q))	; Tighten the estimate for q
+	  (any (=ol q ql) (<ol ql q))	; Tighten the estimate for q
 	  (repeated-mul b ql bql)	; bql = b^ql
 	  (divo nw bw1 qh _)		; upper boundary on q-1
 	  (++o ql qdh qh)
